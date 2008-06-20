@@ -1,0 +1,8 @@
+<li id="attachment_<%= attachment.id %>" class="attachment">
+  <% unless attachment.thumbnails.empty? %>
+    <%= link_to image_tag(attachment.thumbnails.first.public_filename),
+                attachment.public_filename, :class => 'thumbnail' %>
+  <% end %>
+  <%= link_to File.basename(attachment.public_filename), attachment.public_filename %>
+  <%= image_tag "admin/minus.png", :alt => "Delete", :class => 'delete' %>
+</li>

@@ -1,0 +1,18 @@
+rails_png:
+  id: 1
+  filename: rails.png
+  content_type: image/png
+  size: 1787
+  width: 50
+  height: 64
+  created_at: <%= 5.minutes.ago.to_s :db %>
+  created_by: 1
+  page_id: 1
+foo_txt:
+  id: 2
+  filename: foo.txt
+  content_type: text/plain
+  size: 3
+  created_at: <%= 5.minutes.ago.to_s :db %>
+  created_by: 1
+  page_id: 1

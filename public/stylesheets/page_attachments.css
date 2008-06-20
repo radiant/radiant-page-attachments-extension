@@ -1,0 +1,48 @@
+#attachments {
+  clear: both;
+  border: 1px solid #d4cba4;
+  background: white;
+  margin: 10px 0;
+}
+#attachments .toolbar { 
+  float: right;
+  padding: 10px;
+  width: 50px;
+  text-align: right;
+}
+#attachments .toolbar img {
+  padding: 5px;
+  cursor: pointer;
+}
+#attachments h3, #attachments p.notice {
+  background: #eae3c5;
+  margin: 0;
+  padding: 0.5em;
+}
+#attachments .attachment-upload {
+  padding: 0.8em;
+}
+#attachments p.notice {
+  padding: .5em .8em;
+  font-style: italic;
+  font-size: 90%;
+  color: red;
+}
+#attachments .attachment-upload img,
+#attachments .attachment img.delete {
+  cursor: pointer;
+  padding: 2px;
+  margin-left: .5em;
+}
+#attachments ol {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+#attachments ol li {
+  display: inline;
+  margin-right: 1em;
+}
+#attachments .attachment .thumbnail img {
+ border: 2px solid #d4cba4;
+}

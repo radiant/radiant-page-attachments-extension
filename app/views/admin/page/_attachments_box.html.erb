@@ -1,0 +1,12 @@
+<div id="attachments">
+  <div class="toolbar">
+    <%= image_tag('admin/plus.png', :alt => 'Add') %>
+  </div>
+  <h3>Attachments (<%= @page.attachments.count %>)</h3>
+
+  <% unless @page.attachments.count.zero? %>
+    <ol>
+      <%= render :partial => 'attachment', :collection => @page.attachments %>
+    </ol>
+  <% end %>
+</div>
