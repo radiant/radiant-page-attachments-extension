@@ -22,10 +22,10 @@ If you don't have `git` installed you can simply [download a tarball][af] of `at
 
 Now you're ready to install `page_attachments`.
 
-  `cd /path/to/radiant`
-  `git clone git://github.com/radiant/radiant-page-attachments-extension.git vendor/extensions/page_attachments`
-  `rake radiant:extensions:page_attachments:migrate`
-  `rake radiant:extensions:page_attachments:update`
+    `cd /path/to/radiant`
+    `git clone git://github.com/radiant/radiant-page-attachments-extension.git vendor/extensions/page_attachments`
+    `rake radiant:extensions:page_attachments:migrate`
+    `rake radiant:extensions:page_attachments:update`
 
 If you don't have `git` you can [download a tarball][pa].
 
