@@ -135,7 +135,7 @@ module PageAttachmentTags
     
     <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."]>
         <r:link /> - <r:date>
-    </r:attachment:each></pre></code>
+    </r:attachment:each></code></pre>
   }
   tag "attachment:each" do |tag|
     page = tag.locals.page
