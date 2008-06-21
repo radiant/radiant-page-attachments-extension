@@ -56,6 +56,10 @@ module PageAttachmentTags
   desc %{
     Renders the date the attachment was uploaded using the specified `format' (Ruby's strftime syntax).
     The 'name' attribute is required on this tag or the parent tag.
+    
+    *Usage*:
+    
+    <pre><code><r:attachment:date name="file.jpg"/></code></pre>
   }
   tag "attachment:date" do |tag|
     raise TagError, "'name' attribute required" unless name = tag.attr['name'] or tag.locals.attachment
