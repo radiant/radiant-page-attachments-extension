@@ -72,6 +72,27 @@ This is caused by RubyInline not having a place to store its generated files and
 
     ENV['INLINEDIR'] = File.join(RAILS_ROOT,'tmp','ruby_inline')
 
+Amazon S3 for Attachment storage
+---
+
+Since `page_attachments` uses `attachment_fu` for the handling of attachments it's just as easy to use [S3][s3] as it is to use your hard drive. Before you get started with this there are a few things to keep in mind:
+
+* If you've already started storing attachments on your hard drive **this will break** any `<r:attachment...>` tags pointing to those files. You'll need to remove all existing attachments and re-add them to Amazon S3.
+* You have to install the `AWS::S3` gem. In some shared hosting environments this might not be possible.
+* The `AWS::S3` gem does not (currently) support EU buckets, so if that's all you have you'll need to create a bucket in the US.
+
+Before you start make sure you have `page_attachments` working using your hard drive. Once you've tested an upload or two to the hard drive and feel confident the basic setup is working, dive right in.
+
+1. `gem install aws-s3`
+2. `cd /path/to/radiant`
+3. `cp vendor/plugins/attachment_fu/amazon_s3.yml.tpl config/amazon_s3.yml`
+4. edit `config/amazon_s3.yml` with your S3 credentials
+5. `cp vendor/extensions/page_attachments/app/models/page_attachment.rb vendor/extensions/page_attachments/app/models/page_attachment.rb.bak`
+6. edit line 2 of `vendor/extensions/page_attachments/app/models/page_attachment.rb` changing `:file_system` to `:s3`
+7. restart your server
+
+Add an attachment and make sure the link it gives back is on S3. You should see all your attachments start showing up at `http://s3.amazonaws.com/bucket-name/page_attachments/`. While it is possible to customize the URL to Amazon (i.e. http://attachments.your-domain.com/) but it's beyond the scope of this document and a task best left for those that really need custom URLs.
+
 [rd]: http://radiantcms.org/
 [sc]: http://seancribbs.com/
 [is]: http://seattlerb.rubyforge.org/ImageScience.html
@@ -79,3 +100,4 @@ This is caused by RubyInline not having a place to store its generated files and
 [rm]: http://rmagick.rubyforge.org/
 [af]: http://github.com/technoweenie/attachment_fu/tree/master
 [pa]: http://github.com/radiant/radiant-page-attachments-extension/tarball/master
+[s3]: http://www.amazon.com/gp/browse.html?node=16427261
