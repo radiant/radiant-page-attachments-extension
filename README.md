@@ -98,6 +98,6 @@ Add an attachment and make sure the link it gives back is on S3. You should see 
 [is]: http://seattlerb.rubyforge.org/ImageScience.html
 [mm]: http://rubyforge.org/projects/mini-magick/
 [rm]: http://rmagick.rubyforge.org/
-[af]: http://github.com/technoweenie/attachment_fu/tree/master
+[af]: http://github.com/technoweenie/attachment_fu/tarball/master
 [pa]: http://github.com/radiant/radiant-page-attachments-extension/tarball/master
 [s3]: http://www.amazon.com/gp/browse.html?node=16427261
