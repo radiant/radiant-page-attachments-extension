@@ -4,7 +4,7 @@ Page Attachments
 About
 ---
 
-A [Radiant][rd] Extension by [Sean Cribbs][sc] that adds page-attachment-style asset management.
+A [Radiant][rd] Extension by [Sean Cribbs][sc] that adds page-attachment-style asset management.  Page Attachments adds support for file uploads realized as attachments to individual pages.  Attachments can have an order via acts_as_list, a title, a description and various metadata fields as provided by AttachmentFu.
 
 Installation
 ---
@@ -41,6 +41,7 @@ Now when you login and edit a page, you'll find the "Attachments" interface belo
 Usage
 ---
 
+* See the "available tags" documentation built into the Radiant page admin for more details.
 * Reference an attachment by name `<r:attachment name="file.txt">...</r:attachment>`
 * Display an attachment's URL `<r:attachment:url name="file.jpg"/>`
 * Display an attachment's `#{key}` attribute `<r:attachment:#{key} name="file.jpg"/>`

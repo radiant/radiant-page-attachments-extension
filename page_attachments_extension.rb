@@ -1,5 +1,7 @@
 require_dependency 'application'
-require File.dirname(__FILE__) + '/lib/geometry'
+unless Object.const_defined?(:Geometry)
+	require File.dirname(__FILE__) + '/lib/geometry'
+end
 require 'tempfile'
 
 class PageAttachmentsExtension < Radiant::Extension
@@ -7,9 +9,9 @@ class PageAttachmentsExtension < Radiant::Extension
   description "Adds page-attachment-style asset management."
   url "http://seancribbs.com"
 
-  # define_routes do |map|
-  #   map.connect 'admin/attachments/:action/:id', :controller => 'page_attachments'
-  # end
+   define_routes do |map|
+     map.connect 'page_attachments/:action/:id', :controller => 'page_attachments'
+   end
   
   def activate
     # Contents of attachment_fu/init.rb

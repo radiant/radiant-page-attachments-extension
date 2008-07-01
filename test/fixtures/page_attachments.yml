@@ -8,6 +8,9 @@ rails_png:
   created_at: <%= 5.minutes.ago.to_s :db %>
   created_by: 1
   page_id: 1
+  title: Rails logo
+  description: The awesome Rails logo.
+  position: 1
 foo_txt:
   id: 2
   filename: foo.txt
@@ -16,3 +19,6 @@ foo_txt:
   created_at: <%= 5.minutes.ago.to_s :db %>
   created_by: 1
   page_id: 1
+  title: Text.
+  description: Nice shootin', text.
+  position: 2

@@ -1,12 +1,10 @@
 module PageAttachmentAssociations
   def self.included(base)
     base.class_eval {
-      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy
+      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy, :order => 'position'
   
       attr_accessor :add_attachments
-      attr_accessor :delete_attachments
       after_save :save_attachments
-      after_save :destroy_attachments
       include InstanceMethods
     }
   end
@@ -18,19 +16,16 @@ module PageAttachmentAssociations
       att.blank? ? ((parent.attachment(name) if parent) or nil) : att
     end
 
-    def destroy_attachments
-      if @delete_attachments
-        @delete_attachments.each do |attachment_id|
-          PageAttachment.destroy(attachment_id)
-        end
-      end
-      @delete_attachments = nil
-    end
-      
     def save_attachments
-      if @add_attachments
-        @add_attachments.each do |attachment|
-          attachments << PageAttachment.new(:uploaded_data => attachment)
+      if @add_attachments && ! @add_attachments['file'].blank?
+		i = 0
+        @add_attachments['file'].each do |page_attach|
+          attachments << PageAttachment.new(
+			  :uploaded_data => page_attach, 
+			  :title => @add_attachments['title'][i],
+			  :description => @add_attachments['description'][i]
+		  )
+		  i += 1
         end  
       end
       @add_attachments = nil

@@ -1,8 +1,6 @@
 document.observe("dom:loaded", function() {
   when('attachments', function(container) {
-    var upload = '<div class="attachment-upload"><label>Upload file: <input type="file" name="page[add_attachments][]" /></label> <img src="/images/admin/minus.png" alt="cancel" /></div>'
-    var deletion = new Template('<input type="hidden" name="page[delete_attachments][]" value="#{id}" />')
-    var notice = '<p class="notice">Removed attachments will be deleted when you save this page.</p>'
+    var upload = '<div class="attachment-upload"><label>Upload file: <br/>Title: <input type="text" size="40" name="page[add_attachments][title][]"><br/>Description: <input type="text" size="60" name="page[add_attachments][description][]"><br/>File: <input type="file" name="page[add_attachments][file][]" /></label> <img src="/images/admin/minus.png" alt="cancel" /></div>'
     
     container.observe('click', function(e) {
       var target = $(e.target)
@@ -15,14 +13,22 @@ document.observe("dom:loaded", function() {
         e.stop()
       }
       else if (target.match('img.delete')) {
-        if (confirm("Really delete this attachment?")) {
+        if (confirm("Really delete this attachment? This will take effect immediately.")) {
           var attachment = e.findElement('.attachment')
           var id = attachment.id.split('_').last()
-          attachment.remove()
-          if (!container.down('p.notice')) container.insert(notice)
-          container.insert(deletion.evaluate({ id: id }))
+          new Ajax.Updater('attachment_list','/page_attachments/destroy/', {method:'post', parameters:'id=' + id})
+		  var attach_count = $('attachment_count')
+		  attach_count.update(parseInt(attach_count.innerHTML) - 1) 
         }
-      }
+      } else if(target.match('img.higher')) {
+        var attachment = e.findElement('.attachment')
+        var id = attachment.id.split('_').last()
+        new Ajax.Updater('attachment_list','/page_attachments/move_higher/', {method:'post', parameters:'id=' + id})
+	  } else if(target.match('img.lower')) {
+        var attachment = e.findElement('.attachment')
+        var id = attachment.id.split('_').last()
+        new Ajax.Updater('attachment_list','/page_attachments/move_lower/', {method:'post', parameters:'id=' + id})
+	  }
     })
   })
 })
