@@ -137,7 +137,7 @@ module PageAttachmentTags
     
     *Usage*:
     
-    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."]>
+    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."] [limit=0] [offset=0]>
         <r:link /> - <r:date>
     </r:attachment:each></code></pre>
   }
@@ -145,8 +145,10 @@ module PageAttachmentTags
     page = tag.locals.page
   	order = tag.attr["order"] || "asc"
     by = tag.attr["by"] || "id"
+    limit = tag.attr["limit"] || nil
+    offset = tag.attr["offset"] || nil
     returning String.new do |output|
-      page.attachments.find(:all, :order => [by, order].join(" ")).each do |att|
+      page.attachments.find(:all, :order => [by, order].join(" "), :limit => limit, :offset => offset).each do |att|
         tag.locals.attachment = att
         output << tag.expand
       end
