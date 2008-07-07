@@ -35,7 +35,7 @@ module PageAttachmentTags
     attachment.public_filename(size)
   end
   
-  [:content_type, :size, :width, :height].each do |key|
+  [:content_type, :size, :width, :height, :title].each do |key|
     desc %{
       Renders the `#{key}' attribute of the attachment.     
       The 'name' attribute is required on this tag or the parent tag.  The optional 'size'

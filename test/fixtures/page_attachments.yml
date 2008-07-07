@@ -1,5 +1,6 @@
 rails_png:
   id: 1
+  title: Rails Logo
   filename: rails.png
   content_type: image/png
   size: 1787
@@ -10,6 +11,7 @@ rails_png:
   page_id: 1
 foo_txt:
   id: 2
+  title: Simple text file
   filename: foo.txt
   content_type: text/plain
   size: 3

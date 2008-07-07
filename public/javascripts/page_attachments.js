@@ -1,6 +1,10 @@
 document.observe("dom:loaded", function() {
   when('attachments', function(container) {
-    var upload = '<div class="attachment-upload"><label>Upload file: <input type="file" name="page[add_attachments][]" /></label> <img src="/images/admin/minus.png" alt="cancel" /></div>'
+    var upload = '<div class="attachment-upload">'+
+		  '<label>Title: <input type="text" name="page[attachment_titles][]" /></label> '+
+			'<label>Upload file: <input type="file" name="page[add_attachments][]" /></label> '+
+			'<img src="/images/admin/minus.png" alt="cancel" />'+
+			'</div>'
     var deletion = new Template('<input type="hidden" name="page[delete_attachments][]" value="#{id}" />')
     var notice = '<p class="notice">Removed attachments will be deleted when you save this page.</p>'
     

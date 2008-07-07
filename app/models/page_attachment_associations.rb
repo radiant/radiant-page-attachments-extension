@@ -5,6 +5,8 @@ module PageAttachmentAssociations
   
       attr_accessor :add_attachments
       attr_accessor :delete_attachments
+      attr_accessor :attachment_titles
+      
       after_save :save_attachments
       after_save :destroy_attachments
       include InstanceMethods
@@ -29,8 +31,8 @@ module PageAttachmentAssociations
       
     def save_attachments
       if @add_attachments
-        @add_attachments.each do |attachment|
-          attachments << PageAttachment.new(:uploaded_data => attachment)
+        @add_attachments.each_with_index do |attachment, i|
+          attachments << PageAttachment.new(:uploaded_data => attachment, :title => @attachment_titles[i])
         end  
       end
       @add_attachments = nil
