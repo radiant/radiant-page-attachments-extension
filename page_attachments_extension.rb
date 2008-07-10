@@ -1,31 +1,13 @@
 require_dependency 'application'
-require File.dirname(__FILE__) + '/lib/geometry'
-require 'tempfile'
+# require File.dirname(__FILE__) + '/lib/geometry'
+# require 'tempfile'
 
 class PageAttachmentsExtension < Radiant::Extension
-  version "0.2"
+  version "0.3"
   description "Adds page-attachment-style asset management."
-  url "http://seancribbs.com"
+  url "http://radiantcms.org"
 
-  # define_routes do |map|
-  #   map.connect 'admin/attachments/:action/:id', :controller => 'page_attachments'
-  # end
-  
   def activate
-    # Contents of attachment_fu/init.rb
-    
-    Tempfile.class_eval do
-      # overwrite so tempfiles use the extension of the basename.  important for rmagick and image science
-      def make_tmpname(basename, n)
-        ext = nil
-        sprintf("%s%d-%d%s", basename.to_s.gsub(/\.\w+$/) { |s| ext = s; '' }, $$, n, ext)
-      end
-    end
-    
-    ActiveRecord::Base.send(:extend, Technoweenie::AttachmentFu::ActMethods)
-    Technoweenie::AttachmentFu.tempfile_path = ATTACHMENT_FU_TEMPFILE_PATH if Object.const_defined?(:ATTACHMENT_FU_TEMPFILE_PATH)
-    FileUtils.mkdir_p Technoweenie::AttachmentFu.tempfile_path
-
     # Regular page attachments stuff
     Page.class_eval {
       include PageAttachmentAssociations
@@ -34,8 +16,8 @@ class PageAttachmentsExtension < Radiant::Extension
     UserActionObserver.send :include, ObservePageAttachments
     Admin::PageController.send :include, PageAttachmentsInterface
   end
-  
+
   def deactivate
   end
-    
+
 end
