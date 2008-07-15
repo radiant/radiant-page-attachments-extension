@@ -1,6 +1,6 @@
 class PageAttachment < ActiveRecord::Base
   has_attachment :storage => :file_system, 
-                     :thumbnails => {:icon => '50x50>'},
+                     :thumbnails => defined?(PAGE_ATTACHMENT_SIZES) && PAGE_ATTACHMENT_SIZES || {:icon => '50x50>'},
                      :max_size => 10.megabytes
   validates_as_attachment
     
