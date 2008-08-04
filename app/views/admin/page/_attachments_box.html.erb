@@ -4,6 +4,7 @@
   </div>
   <h3>Attachments (<span id="attachment_count"><%= @page.attachments.count %></span>)</h3>
 
+  <%= javascript_tag "var auth_token = '#{form_authenticity_token}';" %>
   <% unless @page.attachments.count.zero? %>
     <ol id="attachment_list">
       <%= render :partial => 'attachment', :collection => @page.attachments %>

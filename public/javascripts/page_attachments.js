@@ -16,18 +16,18 @@ document.observe("dom:loaded", function() {
         if (confirm("Really delete this attachment? This will take effect immediately.")) {
           var attachment = e.findElement('.attachment')
           var id = attachment.id.split('_').last()
-          new Ajax.Updater('attachment_list','/page_attachments/destroy/', {method:'post', parameters:'id=' + id})
+          new Ajax.Updater('attachment_list','/page_attachments/destroy/', {method:'post', parameters:{id: id, authenticity_token: auth_token}})
 		  var attach_count = $('attachment_count')
 		  attach_count.update(parseInt(attach_count.innerHTML) - 1) 
         }
       } else if(target.match('img.higher')) {
         var attachment = e.findElement('.attachment')
         var id = attachment.id.split('_').last()
-        new Ajax.Updater('attachment_list','/page_attachments/move_higher/', {method:'post', parameters:'id=' + id})
+        new Ajax.Updater('attachment_list','/page_attachments/move_higher/', {method:'post', parameters:{id: id, authenticity_token: auth_token}})
 	  } else if(target.match('img.lower')) {
         var attachment = e.findElement('.attachment')
         var id = attachment.id.split('_').last()
-        new Ajax.Updater('attachment_list','/page_attachments/move_lower/', {method:'post', parameters:'id=' + id})
+        new Ajax.Updater('attachment_list','/page_attachments/move_lower/', {method:'post', parameters:{id: id, authenticity_token: auth_token}})
 	  }
     })
   })
