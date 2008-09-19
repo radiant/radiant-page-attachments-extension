@@ -1,6 +1,6 @@
 document.observe("dom:loaded", function() {
   when('attachments', function(container) {
-    var upload = '<div class="attachment-upload"><label>Upload file: <br/>Title: <input type="text" size="40" name="page[add_attachments][title][]"><br/>Description: <input type="text" size="60" name="page[add_attachments][description][]"><br/>File: <input type="file" name="page[add_attachments][file][]" /></label> <img src="/images/admin/minus.png" alt="cancel" /></div>'
+    var upload = '<div class="attachment-upload"><p class="title">Upload file</p><label>Title:</label><input size="60" name="page[add_attachments][title][]"><label>Description:</label><input type="text" size="60"  name="page[add_attachments][description][]"><label>File:</label><input type="file" size="60" name="page[add_attachments][file][]" /><img src="/images/admin/minus.png" alt="cancel" /></div>'
     
     container.observe('click', function(e) {
       var target = $(e.target)

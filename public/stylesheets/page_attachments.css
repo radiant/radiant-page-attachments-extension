@@ -54,3 +54,18 @@
  border: 2px solid #d4cba4;
 }
 
+#attachments p.title
+{
+	border-bottom:1px #EAE3C5 solid;
+}
+
+#attachments label , #attachments p.title
+{
+	font-weight: bold;
+}
+
+#attachments input
+{
+	margin-bottom:5px;
+}
+
