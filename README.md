@@ -94,6 +94,15 @@ Before you start make sure you have `page_attachments` working using your hard d
 
 Add an attachment and make sure the link it gives back is on S3. You should see all your attachments start showing up at `http://s3.amazonaws.com/bucket-name/page_attachments/`. While it is possible to customize the URL to Amazon (i.e. http://attachments.your-domain.com/) but it's beyond the scope of this document and a task best left for those that really need custom URLs.
 
+Contributors
+---
+
+These people have contributed patches that have been added to the extension:
+
+* [John Muhl][jm]
+* [Daniel Collis-Puro][djcp]
+* [James Burka][jb]
+
 [rd]: http://radiantcms.org/
 [sc]: http://seancribbs.com/
 [is]: http://seattlerb.rubyforge.org/ImageScience.html
@@ -102,3 +111,6 @@ Add an attachment and make sure the link it gives back is on S3. You should see 
 [af]: http://github.com/technoweenie/attachment_fu/tarball/master
 [pa]: http://github.com/radiant/radiant-page-attachments-extension/tarball/master
 [s3]: http://www.amazon.com/gp/browse.html?node=16427261
+[jm]: http://github.com/johnmuhl
+[djcp]: http://www.kookdujour.com/
+[jb]: http://github.com/jjburka
