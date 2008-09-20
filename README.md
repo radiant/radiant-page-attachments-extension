@@ -73,6 +73,16 @@ This is caused by RubyInline not having a place to store its generated files and
 
     ENV['INLINEDIR'] = File.join(RAILS_ROOT,'tmp','ruby_inline')
 
+---
+
+If you have trouble attaching files to Page Types other than the normal type, try editing the following line in your `config/environment.rb` file
+
+		config.extensions = [ :all ]
+
+to look like
+
+		config.extensions = [ :page_attachments, :all ]
+
 Amazon S3 for Attachment storage
 ---
 
