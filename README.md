@@ -112,6 +112,7 @@ These people have contributed patches that have been added to the extension:
 * [John Muhl][jm]
 * [Daniel Collis-Puro][djcp]
 * [James Burka][jb]
+* [Istvan Hoka][ihoka]
 
 [rd]: http://radiantcms.org/
 [sc]: http://seancribbs.com/
@@ -124,3 +125,4 @@ These people have contributed patches that have been added to the extension:
 [jm]: http://github.com/johnmuhl
 [djcp]: http://www.kookdujour.com/
 [jb]: http://github.com/jjburka
+[ihoka]: http://github.com/ihoka
