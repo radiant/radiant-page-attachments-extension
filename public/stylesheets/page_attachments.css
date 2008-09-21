@@ -34,15 +34,38 @@
   padding: 2px;
   margin-left: .5em;
 }
+#attachments .attachment img.higher,
+#attachments .attachment img.lower {
+  cursor: pointer;
+  padding: 2px;
+}
 #attachments ol {
   list-style: none;
   padding: 10px;
   margin: 0;
 }
 #attachments ol li {
-  display: inline;
+  float: left;
+  height: 120px;
+  width: 120px;
   margin-right: 1em;
 }
 #attachments .attachment .thumbnail img {
  border: 2px solid #d4cba4;
 }
+
+#attachments p.title
+{
+	border-bottom:1px #EAE3C5 solid;
+}
+
+#attachments label , #attachments p.title
+{
+	font-weight: bold;
+}
+
+#attachments input
+{
+	margin-bottom:5px;
+}
+

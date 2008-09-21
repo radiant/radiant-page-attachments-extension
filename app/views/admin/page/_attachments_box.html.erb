@@ -2,11 +2,13 @@
   <div class="toolbar">
     <%= image_tag('admin/plus.png', :alt => 'Add') %>
   </div>
-  <h3>Attachments (<%= @page.attachments.count %>)</h3>
+  <h3>Attachments (<span id="attachment_count"><%= @page.attachments.count %></span>)</h3>
 
+  <%= javascript_tag "var auth_token = '#{form_authenticity_token}';" %>
   <% unless @page.attachments.count.zero? %>
-    <ol>
+    <ol id="attachment_list">
       <%= render :partial => 'attachment', :collection => @page.attachments %>
     </ol>
+    <div style="clear:both;"></div>
   <% end %>
 </div>

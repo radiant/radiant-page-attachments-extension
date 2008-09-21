@@ -2,8 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class PageAttachmentsExtensionTest < Test::Unit::TestCase
 
-  fixtures :page_attachments, :pages
-  test_helper :render
+  fixtures :page_attachments, :pages, :users
+  test_helper :pages, :render
   
   # Replace this with your real tests.
   def setup
@@ -19,8 +19,14 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert Page.included_modules.include?(PageAttachmentTags)
     assert Page.included_modules.include?(PageAttachmentAssociations)
     assert UserActionObserver.included_modules.include?(ObservePageAttachments)
-    assert ActiveRecord::Base.extended_by.include?(Technoweenie::AttachmentFu::ActMethods)
-    
+	assert ActiveRecord::Base.included_modules.include?(ActiveRecord::Acts::List)
+	assert Technoweenie::AttachmentFu
+
+    assert UserActionObserver.methods.include?('observed_class')
+    #assert_equal UserActionObserver.instance.observed_class, [User, Page, Layout, Snippet, Asset]
+  end
+
+  def test_page_instance_methods
     assert Page.instance_methods.include?("attachments")
     assert Page.instance_methods.include?("attachments=")    
     assert Page.instance_methods.include?("attachment")    
@@ -28,11 +34,8 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert Page.instance_methods.include?("add_attachments=")
     assert Page.instance_methods.include?("save_attachments")
     
-    assert UserActionObserver.methods.include?('observed_class')
-    #assert_equal UserActionObserver.instance.observed_class, [User, Page, Layout, Snippet, Asset]
-    
     assert Page.instance_methods.include?("tag:attachment")
-    [:content_type, :size, :width, :height, :date, :image, :link, :author].each do |key|
+    [:content_type, :size, :width, :height, :date, :image, :link, :author, :title, :short_title, :short_description, :short_filename, :description, :position].each do |key|
       assert Page.instance_methods.include?("tag:attachment:#{key}")
     end
   end
@@ -49,12 +52,18 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert_renders img.public_filename, '<r:attachment:url name="rails.png" />', '/'
     assert_renders img.title, '<r:attachment:title name="rails.png" />', '/'
     assert_renders img.content_type, '<r:attachment:content_type name="rails.png" />', '/'
+
     assert_renders img.size.to_s, '<r:attachment:size name="rails.png" />', '/'
+    assert_renders img.size.to_s, '<r:attachment:size name="rails.png" units="blargobytes" />', '/'
+    assert_renders "1.75", '<r:attachment:size name="rails.png" units="kilobytes" />', '/'
+
     assert_renders img.width.to_s, '<r:attachment:width name="rails.png" />', '/'    
     assert_renders img.height.to_s, '<r:attachment:height name="rails.png" />', '/'
     assert_renders img.content_type, '<r:attachment:content_type name="rails.png" />', '/'
     assert_renders img.created_at.strftime("%Y-%m-%d"), '<r:attachment:date name="rails.png" format="%Y-%m-%d" />', '/'
-    # assert_renders img.created_by.name, '<r:attachment:author name="rails.png" />', '/'
+    assert_renders img.created_by.name, '<r:attachment:author name="rails.png" />', '/'
+	assert_renders "", '<r:attachment:height name="foo.txt"/>','/'
+	assert_renders "", '<r:attachment:width name="foo.txt"/>','/'
 
     assert_renders %{<img src="#{img.public_filename}" />}, '<r:attachment:image name="rails.png" />', '/'
     assert_renders %{<img src="#{img.public_filename}" style="float: right;" />}, '<r:attachment:image name="rails.png" style="float: right;"/>', '/'
@@ -64,9 +73,34 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert_renders %{<a href="#{img.public_filename}">Rails</a>}, '<r:attachment:link name="rails.png">Rails</r:attachment:link>', '/'
     assert_renders %{<a href="#{img.public_filename}">Rails</a>}, '<r:attachment:link name="rails.png" label="Rails"/>', '/'
     
+	assert_renders %{Rails logo},'<r:attachment:title name="rails.png"/>','/'
+	assert_renders %{Rails logo},'<r:attachment:short_title name="rails.png"/>','/'
+	assert_renders %{The awesome Rails logo.},'<r:attachment:description name="rails.png"/>','/'
+
+	assert_renders %{The awesome ...},'<r:attachment:short_description name="rails.png"/>','/'
+	assert_renders %{The aweso ...},'<r:attachment:short_description name="rails.png" length="13" />','/'
+	assert_renders %{The awesome Rails logo.}, '<r:attachment:short_description name="rails.png" length="35" />','/'
+
+	assert_renders %{The awesome....}, '<r:attachment:short_description name="rails.png" length="15" suffix="...." />','/'
+
+	assert_renders %{rails.png},'<r:attachment:filename name="rails.png"/>','/'
+	assert_renders %{rails.png},'<r:attachment:short_filename name="rails.png"/>','/'
+	assert_renders %{rails...},'<r:attachment:short_filename name="rails.png" suffix="..." length="8" />','/'
+
     assert_render_error "attachment is not an image.", '<r:attachment:image name="foo.txt" />', '/'
   end
-  
+ 
+  def test_positions
+	  img = page_attachments(:rails_png)
+	  txt = page_attachments(:foo_txt)
+	  assert_equal 1, img.position
+	  assert_equal 2, txt.position
+	  img.move_lower
+	  txt.reload
+	  assert_equal 2, img.position
+	  assert_equal 1, txt.position
+  end
+
   def test_iteration
     img = page_attachments(:rails_png)
     txt = page_attachments(:foo_txt)
@@ -93,4 +127,5 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert_renders img.public_filename, '<r:attachment:url name="rails.png" />', '/documentation'
     assert_renders txt.public_filename, '<r:attachment:url name="foo.txt" />', '/documentation'
   end
+
 end
