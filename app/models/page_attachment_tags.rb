@@ -35,9 +35,50 @@ module PageAttachmentTags
     attachment.public_filename(size)
   end
   
-  [:content_type, :size, :width, :height, :title].each do |key|
+  [:short_title,:short_description,:short_filename].each do |key|
+  desc %{
+  Renders the '#{key}' attribute of the attachment.
+  The 'name' attribute is required on this tag or the parent tag. 
+  The optional 'length' attribute defines how many characters of the attribute to display. It defaults to 15 total characters, including the 'suffix'.
+  If the attribute exceeds 'length', 'suffix' says what to tag onto the back to show truncation. It defaults to ' ...'
+    
+	*Usage*:
+    
+    <pre><code><r:attachment:#{key} name="file.jpg" [length="number of characters"] [suffix="More . . ."]/></code></pre>
+  }
+    tag "attachment:#{key}" do |tag|
+      raise TagError, "'name' attribute required" unless name = tag.attr['name'] or tag.locals.attachment
+      page = tag.locals.page
+      attachment = tag.locals.attachment || page.attachment(name)
+	  tlength = (tag.attr['length']) ? tag.attr['length'].to_i : 15
+	  suffix = (tag.attr['suffix']) ? tag.attr['suffix'].to_s : ' ...'
+      attachment.send("#{key}",tlength,suffix)
+    end
+  end
+
+  desc %{
+  Renders the 'size' attribute of the attachment.
+  The 'name' attribute is required on this tag or the parent tag. Returns bytes by default. Use the optional 'units' parameter to change the units this tag returns.
+    
+	*Usage*:
+    
+    <pre><code><r:attachment:size name="file.jpg" [units="bytes|kilobytes|megabytes|gigabytes"] /></code></pre>
+ }
+  tag "attachment:size" do |tag|
+      raise TagError, "'name' attribute required" unless name = tag.attr['name'] or tag.locals.attachment
+      page = tag.locals.page
+      attachment = tag.locals.attachment || page.attachment(name)
+	  units = tag.attr['units'] || 'bytes'
+	  valid_units = ['bytes','byte','kilobytes','kilobyte','megabytes','megabyte','gigabytes','gigabyte']
+	  units = (valid_units.include?(units)) ? units : 'bytes'
+	  return attachment.size if units == 'bytes'
+      sprintf('%.2f',(attachment.size.to_f / 1.send(units)))
+  end
+
+  
+  [:content_type, :width, :height, :title, :description, :position, :filename].each do |key|
     desc %{
-      Renders the `#{key}' attribute of the attachment.     
+      Renders the '#{key}' attribute of the attachment.     
       The 'name' attribute is required on this tag or the parent tag.  The optional 'size'
       attributes applies only to images.
       
@@ -54,12 +95,8 @@ module PageAttachmentTags
   end
   
   desc %{
-    Renders the date the attachment was uploaded using the specified `format' (Ruby's strftime syntax).
+    Renders the date the attachment was uploaded using the specified 'format' (Ruby's strftime syntax).
     The 'name' attribute is required on this tag or the parent tag.
-    
-    *Usage*:
-    
-    <pre><code><r:attachment:date name="file.jpg"/></code></pre>
   }
   tag "attachment:date" do |tag|
     raise TagError, "'name' attribute required" unless name = tag.attr['name'] or tag.locals.attachment
@@ -144,7 +181,7 @@ module PageAttachmentTags
   tag "attachment:each" do |tag|
     page = tag.locals.page
   	order = tag.attr["order"] || "asc"
-    by = tag.attr["by"] || "id"
+    by = tag.attr["by"] || "position"
     limit = tag.attr["limit"] || nil
     offset = tag.attr["offset"] || nil
     returning String.new do |output|

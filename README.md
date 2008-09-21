@@ -4,7 +4,7 @@ Page Attachments
 About
 ---
 
-A [Radiant][rd] Extension by [Sean Cribbs][sc] that adds page-attachment-style asset management.
+A [Radiant][rd] Extension by [Sean Cribbs][sc] that adds page-attachment-style asset management.  Page Attachments adds support for file uploads realized as attachments to individual pages.  Attachments can have an order via acts_as_list, a title, a description and various metadata fields as provided by AttachmentFu.
 
 Installation
 ---
@@ -41,6 +41,7 @@ Now when you login and edit a page, you'll find the "Attachments" interface belo
 Usage
 ---
 
+* See the "available tags" documentation built into the Radiant page admin for more details.
 * Reference an attachment by name `<r:attachment name="file.txt">...</r:attachment>`
 * Display an attachment's URL `<r:attachment:url name="file.jpg"/>`
 * Display an attachment's `#{key}` attribute `<r:attachment:#{key} name="file.jpg"/>`
@@ -72,6 +73,16 @@ This is caused by RubyInline not having a place to store its generated files and
 
     ENV['INLINEDIR'] = File.join(RAILS_ROOT,'tmp','ruby_inline')
 
+---
+
+If you have trouble attaching files to Page Types other than the normal type, try editing the following line in your `config/environment.rb` file
+
+		config.extensions = [ :all ]
+
+to look like
+
+		config.extensions = [ :page_attachments, :all ]
+
 Amazon S3 for Attachment storage
 ---
 
@@ -93,6 +104,15 @@ Before you start make sure you have `page_attachments` working using your hard d
 
 Add an attachment and make sure the link it gives back is on S3. You should see all your attachments start showing up at `http://s3.amazonaws.com/bucket-name/page_attachments/`. While it is possible to customize the URL to Amazon (i.e. http://attachments.your-domain.com/) but it's beyond the scope of this document and a task best left for those that really need custom URLs.
 
+Contributors
+---
+
+These people have contributed patches that have been added to the extension:
+
+* [John Muhl][jm]
+* [Daniel Collis-Puro][djcp]
+* [James Burka][jb]
+
 [rd]: http://radiantcms.org/
 [sc]: http://seancribbs.com/
 [is]: http://seattlerb.rubyforge.org/ImageScience.html
@@ -101,3 +121,6 @@ Add an attachment and make sure the link it gives back is on S3. You should see 
 [af]: http://github.com/technoweenie/attachment_fu/tarball/master
 [pa]: http://github.com/radiant/radiant-page-attachments-extension/tarball/master
 [s3]: http://www.amazon.com/gp/browse.html?node=16427261
+[jm]: http://github.com/johnmuhl
+[djcp]: http://www.kookdujour.com/
+[jb]: http://github.com/jjburka
