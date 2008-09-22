@@ -20,7 +20,7 @@
   padding: 0.5em;
 }
 #attachments .attachment-upload {
-  padding: 0.8em;
+  padding: 0 0.8em 0.8em 0.8em;
 }
 #attachments p.notice {
   padding: .5em .8em;
@@ -38,11 +38,11 @@
 #attachments .attachment img.lower {
   cursor: pointer;
   padding: 2px;
-  margin-left:5px;
+  margin-left:6px;
 }
 #attachments ol {
-  list-style-position:ouside;
-  padding: 10px;
+  list-style-position:outside;
+  padding: 10px 10px 0 10px;
   margin: 0;
 }
 #attachments ol li
@@ -55,7 +55,7 @@
 }
 #attachments ol li a.thumbnail
 {
-  float:left;margin:0 10px 0 10px;width:50px;height:50px;
+  float:left;margin:0 10px 0 10px;
 }
 #attachments ol li p  
 {
@@ -63,7 +63,7 @@
 }
 #attachments ol li  
 {
-  margin-bottom:10px;border-bottom:1px dashed #cccccc;width:66%;padding-bottom:10px;
+  margin-bottom:10px;border-bottom:1px dashed #cccccc;width:66%;padding-bottom:3px;
 }
 
 #attachments .attachment .thumbnail img {
@@ -86,3 +86,7 @@
 {
   color:#FF0000;margin:0 0 10px 20px;
 }
+.clearfix:after                 {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix                       {display:inline-block;}
+.clearfix                       {display:block;}
+li.clearfix                     {display:list-item;}
