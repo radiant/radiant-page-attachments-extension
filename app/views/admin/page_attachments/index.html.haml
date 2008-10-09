@@ -3,8 +3,11 @@
   %tr
     %th Attachment
     %th Page
+    %th Code
   - unless @attachments.blank?
     - @attachments.each do |attachment|
       %tr
         %td= attachment.title.blank? ? attachment.filename : attachment.title
         %td= link_to attachment.page.title, page_edit_url(attachment.page)
+        %td
+          %input{:type => 'text', :size => 40, :value => %{<r:attachment name="#{attachment.filename}" url="#{attachment.page.url}">...your code here...</r:attachment>}}
