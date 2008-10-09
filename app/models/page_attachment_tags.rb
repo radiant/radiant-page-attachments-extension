@@ -8,14 +8,21 @@ module PageAttachmentTags
     attribute (for the filename) on this tag for all contained tags to refer to that attachment.  
     Attachments can be inherited from parent pages.
     
+    You may also define a url where you would like to find an attachment. By default the tag
+    will look to the current page for it's attachments.
+    
     *Usage*:
     
-    <pre><code><r:attachment name="file.txt">...</r:attachment></code></pre>
+    <pre><code><r:attachment name="file.txt" [url="/other/location"]>...</r:attachment></code></pre>
   }
   tag "attachment" do |tag|
-    page = tag.locals.page
-    tag.locals.attachment = page.attachment(tag.attr['name']) rescue nil if tag.attr['name']
-    tag.expand
+    scope_url = tag.attr['url'] || tag.locals.page.url
+    if page = Page.find_by_url(scope_url)
+      tag.locals.attachment = page.attachment(tag.attr['name']) rescue nil if tag.attr['name']
+      tag.expand
+    else
+      raise TagError, "'url' attribute must set be for an existing page"
+    end
   end
   
   desc %{
