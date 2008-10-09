@@ -1,0 +1,10 @@
+%h1 Page Attachments
+%table.index
+  %tr
+    %th Attachment
+    %th Page
+  - unless @attachments.blank?
+    - @attachments.each do |attachment|
+      %tr
+        %td= attachment.title.blank? ? attachment.filename : attachment.title
+        %td= link_to attachment.page.title, page_edit_url(attachment.page)

@@ -8,10 +8,15 @@ class PageAttachmentsExtension < Radiant::Extension
   url "http://radiantcms.org"
 
    define_routes do |map|
+     map.namespace :admin do |admin|
+       admin.page_attachments '/page_attachments', :controller => 'page_attachments'
+     end
+    
      map.connect 'page_attachments/:action/:id', :controller => 'page_attachments'
    end
   
   def activate
+    admin.tabs.add "Attachments", "/admin/page_attachments", :after => "Layouts", :visibility => [:admin]
     # Regular page attachments stuff
     Page.class_eval {
       include PageAttachmentAssociations
