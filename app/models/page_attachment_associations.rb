@@ -1,7 +1,17 @@
 module PageAttachmentAssociations
   def self.included(base)
     base.class_eval {
-      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy, :order => 'position'
+      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy, :order => 'position' do
+        def by_extensions(extensions, options={})
+          conditions = unless extensions.blank?
+            [ extensions.map { |ext| "page_attachments.filename LIKE ?"}.join(' OR '), 
+              *extensions.map { |ext| "%#{ext}" } ]
+          else
+            nil
+          end
+          find(:all, options.merge(:conditions => conditions))
+        end
+      end
   
       attr_accessor :add_attachments
       after_save :save_attachments
