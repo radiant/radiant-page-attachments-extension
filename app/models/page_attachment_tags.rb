@@ -192,4 +192,25 @@ module PageAttachmentTags
       end
     end
   end  
+  
+  desc %{
+    Renders the 'extension' virtual attribute of the attachment, extracted from filename.
+    
+  *Usage*:
+  
+<pre><code>
+<ul>
+  <r:attachment:each extensions="doc|pdf">
+    <li class="<r:extension/>">
+      <r:link/>
+    </li>
+  </r:attachment:each>
+</ul>
+</code></pre>
+  }
+  tag "attachment:extension" do |tag|
+    raise TagError, "must be nested inside an attachment or attachment:each tag" unless tag.locals.attachment
+    attachment = tag.locals.attachment
+    attachment.filename[/\.(\w+)$/, 1]
+  end
 end
