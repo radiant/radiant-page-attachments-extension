@@ -127,5 +127,13 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert_renders img.public_filename, '<r:attachment:url name="rails.png" />', '/documentation'
     assert_renders txt.public_filename, '<r:attachment:url name="foo.txt" />', '/documentation'
   end
+  
+  def test_filter_by_extension
+    assert_renders "rails.png", %{<r:attachment:each extensions="png"><r:filename/></r:attachment:each>}
+    assert_renders "rails.pngfoo.txt", %{<r:attachment:each extensions="png|txt"><r:filename/></r:attachment:each>}
+  end
 
+  def test_extension_tag
+    assert_renders "pngtxt", %{<r:attachment:each><r:extension/></r:attachment:each>}
+  end
 end
