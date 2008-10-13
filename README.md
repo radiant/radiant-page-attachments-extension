@@ -31,6 +31,11 @@ If you don't have `git` you can [download a tarball][pa].
 
 During the `migrate` task you may encounter an "`uninitialized constant Technoweenie::AttachmentFu::Backends`". If this happens try `git clone git://github.com/technoweenie/attachment_fu.git vendor/extensions/page_attachments/vendor/plugins/attachment_fu` and re-run the `migrate` task.
 
+Attachment thumbnails for images default to `:icon => '50x50>'`. You can customize that by setting
+`PAGE_ATTACHMENT_SIZES` to whatever you need in your `config/environment.rb` file
+
+    PAGE_ATTACHMENT_SIZES = {:thumb => '120x120>', :normal => '640x480>'}
+
 Restart your server and refresh the admin interface.
 
 Managing Attachments
@@ -50,6 +55,7 @@ Usage
 * Display a link to an attachment `<r:attachment:link name="file.jpg"/>` or `<r:attachment:link name="file.jpg">Click Here</r:attachment:link>`
 * Display name of the user who added the attachment `<r:attachment:author name="file.jpg"/>`
 * Iterate through all the attachments on a page `<r:attachment:each><r:link/></r:attachment:each>`
+* Display the extension of an attachement inside iterations with <r:attachment:extension/>
 
 Troubleshooting
 ---
