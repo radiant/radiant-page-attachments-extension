@@ -174,7 +174,7 @@ module PageAttachmentTags
     
     *Usage*:
     
-    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."] [limit=0] [offset=0] [extensio="png|pdf|doc"]>
+    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."] [limit=0] [offset=0] [extensions="png|pdf|doc"]>
         <r:link /> - <r:date>
     </r:attachment:each></code></pre>
   }
