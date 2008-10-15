@@ -1,7 +1,7 @@
 class Admin::PageAttachmentsController < ApplicationController
   
   def index
-    @attachments = PageAttachment.find(:all)
+    @attachments = PageAttachment.find(:all, :conditions => {:parent_id => nil})
   end
   
 	def move_higher
