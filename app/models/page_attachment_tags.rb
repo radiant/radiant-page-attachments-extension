@@ -181,7 +181,7 @@ module PageAttachmentTags
     
     *Usage*:
     
-    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."] [limit=0] [offset=0]>
+    <pre><code><r:attachment:each [order="asc|desc"] [by="filename|size|created_at|..."] [limit=0] [offset=0] [extensions="png|pdf|doc"]>
         <r:link /> - <r:date>
     </r:attachment:each></code></pre>
   }
@@ -191,11 +191,33 @@ module PageAttachmentTags
     by = tag.attr["by"] || "position"
     limit = tag.attr["limit"] || nil
     offset = tag.attr["offset"] || nil
+    extensions = tag.attr["extensions"] && tag.attr["extensions"].split('|') || []
     returning String.new do |output|
-      page.attachments.find(:all, :order => [by, order].join(" "), :limit => limit, :offset => offset).each do |att|
+      page.attachments.by_extensions(extensions, :order => [by, order].join(" "), :limit => limit, :offset => offset).each do |att|
         tag.locals.attachment = att
         output << tag.expand
       end
     end
   end  
+  
+  desc %{
+    Renders the 'extension' virtual attribute of the attachment, extracted from filename.
+    
+  *Usage*:
+  
+<pre><code>
+<ul>
+  <r:attachment:each extensions="doc|pdf">
+    <li class="<r:extension/>">
+      <r:link/>
+    </li>
+  </r:attachment:each>
+</ul>
+</code></pre>
+  }
+  tag "attachment:extension" do |tag|
+    raise TagError, "must be nested inside an attachment or attachment:each tag" unless tag.locals.attachment
+    attachment = tag.locals.attachment
+    attachment.filename[/\.(\w+)$/, 1]
+  end
 end

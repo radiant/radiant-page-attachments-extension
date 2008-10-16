@@ -20,7 +20,7 @@
   padding: 0.5em;
 }
 #attachments .attachment-upload {
-  padding: 0.8em;
+  padding: 0 0.8em 0.8em 0.8em;
 }
 #attachments p.notice {
   padding: .5em .8em;
@@ -32,40 +32,61 @@
 #attachments .attachment img.delete {
   cursor: pointer;
   padding: 2px;
-  margin-left: .5em;
+  margin-left:7px;
 }
 #attachments .attachment img.higher,
 #attachments .attachment img.lower {
   cursor: pointer;
   padding: 2px;
+  margin-left:6px;
 }
 #attachments ol {
-  list-style: none;
-  padding: 10px;
+  list-style-position:outside;
+  padding: 10px 10px 0 10px;
   margin: 0;
 }
-#attachments ol li {
-  float: left;
-  height: 120px;
-  width: 120px;
-  margin-right: 1em;
+#attachments ol li
+{
+  margin-left:20px;
 }
+#attachments ol li div 
+{
+  float:left;width:25px;
+}
+#attachments ol li a.thumbnail
+{
+  float:left;margin:0 10px 0 10px;
+}
+#attachments ol li p  
+{
+  margin:0 0 5px 0;
+}
+#attachments ol li  
+{
+  margin-bottom:10px;border-bottom:1px dashed #cccccc;width:66%;padding-bottom:3px;
+}
+
 #attachments .attachment .thumbnail img {
  border: 2px solid #d4cba4;
 }
 
 #attachments p.title
 {
-	border-bottom:1px #EAE3C5 solid;
+	border-bottom:1px #EAE3C5 solid;width:66%;font-size:17px;font-weight:bold;
 }
-
-#attachments label , #attachments p.title
+#attachments table th
 {
-	font-weight: bold;
+  font-weight:bold;text-align:right;padding-right:10px;width:120px;padding-bottom:5px;
 }
-
-#attachments input
+#attachments table td
 {
-	margin-bottom:5px;
+ padding-bottom:5px; 
 }
-
+#attachments p#reorder_notice
+{
+  color:#FF0000;margin:0 0 10px 20px;
+}
+.clearfix:after                 {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix                       {display:inline-block;}
+.clearfix                       {display:block;}
+li.clearfix                     {display:list-item;}

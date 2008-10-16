@@ -1,4 +1,4 @@
-<li id="attachment_<%= attachment.id %>" class="attachment">
+<li id="attachment_<%= attachment.id %>" class="attachment clearfix">
 <div>
 	<%= image_tag "admin/minus.png", :alt => "Delete", :class => 'delete' %>
 	<% unless attachment.first? %>
@@ -9,11 +9,11 @@
 	<% end %>
 </div>
   <% unless attachment.thumbnails.empty? %>
-    <%= link_to image_tag(attachment.thumbnails.first.public_filename),
+    <%= link_to image_tag(attachment.public_filename("icon")),
       attachment.public_filename, :class => 'thumbnail' %>
     <% end %>
     <% unless attachment.title.blank? %>
-		<div><%= h attachment.short_title %></div>
+		<p><%= h attachment.short_title %></p>
 	<% end %>
 	<%= link_to attachment.short_filename, attachment.public_filename %>
 </li>

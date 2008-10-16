@@ -46,6 +46,11 @@ During the `migrate` task you may encounter an "`uninitialized constant
 Technoweenie::AttachmentFu::Backends`". If this happens try `git clone git://github.com/technoweenie/attachment_fu.git vendor/extensions/page_attachments/vendor/plugins/attachment_fu` 
 and re-run the `migrate` task.
 
+Attachment thumbnails for images default to `:icon => '50x50>'`. You can customize that by setting
+`PAGE_ATTACHMENT_SIZES` to whatever you need in your `config/environment.rb` file
+
+    PAGE_ATTACHMENT_SIZES = {:thumb => '120x120>', :normal => '640x480>'}
+
 Restart your server and refresh the admin interface.
 
 Troubleshooting
