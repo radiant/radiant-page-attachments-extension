@@ -1,4 +1,5 @@
 %h1 Page Attachments
+%p Below you'll find a list of all page attachments on your site. You may click to view the attachment file, click to edit the attached page, or use the sample code as a starting point for displaying a particular file on a page.
 %table.index
   %tr
     %th Attachment
@@ -15,3 +16,4 @@
           - else
             - code = %{<r:attachment:link name="#{attachment.filename}" url="#{attachment.page.url}" />}
           %input{:type => 'text', :size => 40, :value => code}
+= will_paginate @attachments

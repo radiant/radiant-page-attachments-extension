@@ -16,6 +16,7 @@ class PageAttachmentsExtension < Radiant::Extension
    end
   
   def activate
+    require 'will_paginate'
     admin.tabs.add "Attachments", "/admin/page_attachments", :after => "Layouts", :visibility => [:admin]
     # Regular page attachments stuff
     Page.class_eval {
