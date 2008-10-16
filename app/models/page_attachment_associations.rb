@@ -1,18 +1,7 @@
 module PageAttachmentAssociations
   def self.included(base)
     base.class_eval {
-      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy, :order => 'position' do
-        def by_extensions(extensions, options={})
-          conditions = unless extensions.blank?
-            [ extensions.map { |ext| "page_attachments.filename LIKE ?"}.join(' OR '), 
-              *extensions.map { |ext| "%#{ext}" } ]
-          else
-            nil
-          end
-          find(:all, options.merge(:conditions => conditions))
-        end
-      end
-  
+      has_many :attachments, :class_name => "PageAttachment", :dependent => :destroy, :order => 'position'
       attr_accessor :add_attachments
       after_save :save_attachments
       include InstanceMethods
@@ -28,14 +17,13 @@ module PageAttachmentAssociations
 
     def save_attachments
       if @add_attachments && ! @add_attachments['file'].blank?
-		i = 0
+		    i = 0
         @add_attachments['file'].each do |page_attach|
           attachments << PageAttachment.new(
-			  :uploaded_data => page_attach, 
-			  :title => @add_attachments['title'][i],
-			  :description => @add_attachments['description'][i]
-		  )
-		  i += 1
+			                    :uploaded_data => page_attach, 
+                  			  :title => @add_attachments['title'][i],
+                  			  :description => @add_attachments['description'][i])
+  		    i += 1
         end  
       end
       @add_attachments = nil
