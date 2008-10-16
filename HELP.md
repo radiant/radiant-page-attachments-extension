@@ -24,3 +24,4 @@ Usage
 * Display a link to an attachment `<r:attachment:link name="file.jpg"/>` or `<r:attachment:link name="file.jpg">Click Here</r:attachment:link>`
 * Display name of the user who added the attachment `<r:attachment:author name="file.jpg"/>`
 * Iterate through all the attachments on a page `<r:attachment:each><r:link/></r:attachment:each>`
+* Display the extension of an attachement inside iterations with `<r:attachment:extension/>`
