@@ -12,8 +12,8 @@
         %td= link_to attachment.page.title, page_edit_url(attachment.page)
         %td
           - if attachment.filename.match(/\.(jpg|gif|png|jpeg|tiff?)$/)
-            - code = %{<r:attachment:image name="#{attachment.filename}" url="#{attachment.page.url}" />}
+            - code = %{<r:attachment name="#{attachment.filename}" url="#{attachment.page.url}"><r:image /></r:attachment>}
           - else
-            - code = %{<r:attachment:link name="#{attachment.filename}" url="#{attachment.page.url}" />}
+            - code = %{<r:attachment name="#{attachment.filename}" url="#{attachment.page.url}"><r:link /></r:attachment>}
           %input{:type => 'text', :size => 40, :value => code}
 = will_paginate @attachments
