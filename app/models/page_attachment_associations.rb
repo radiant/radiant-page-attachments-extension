@@ -22,10 +22,10 @@ module PageAttachmentAssociations
       if @add_attachments && ! @add_attachments['file'].blank?
         i = 0
         @add_attachments['file'].each do |page_attach|
-          attachments << PageAttachment.new(
-                                            :uploaded_data => page_attach,
-                                            :title => @add_attachments['title'][i],
-                                            :description => @add_attachments['description'][i])
+          attach = PageAttachment.new(:uploaded_data => page_attach)
+          attach.title = @add_attachments['title'][i]
+          attach.description = @add_attachments['description'][i]
+          attachments << attach
           i += 1
         end
       end
