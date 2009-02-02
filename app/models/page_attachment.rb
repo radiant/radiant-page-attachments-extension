@@ -1,6 +1,10 @@
 class PageAttachment < ActiveRecord::Base
   acts_as_list :scope => :page_id
-  has_attachment :storage => :s3, 
+  has_attachment :storage => :s3,
+                     :s3_options => {
+                       :cache_control => 'max-age=315360000',
+                       :expires => 'Thu, 31 Dec 2037 23:55:55 GMT'
+                     }
                      :thumbnails => defined?(PAGE_ATTACHMENT_SIZES) && PAGE_ATTACHMENT_SIZES || {:icon => '144x144>'},
                      :max_size => 10.megabytes
   validates_as_attachment
