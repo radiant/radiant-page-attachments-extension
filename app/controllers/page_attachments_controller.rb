@@ -3,7 +3,7 @@ class PageAttachmentsController < ApplicationController
 		if request.post?
 			@attachment = PageAttachment.find(params[:id])
 			@attachment.move_higher
-			render :partial => 'admin/page/attachment', :layout => false, :collection => @attachment.page.attachments
+			render :partial => 'admin/pages/attachment', :layout => false, :collection => @attachment.page.attachments
 		end
 	end
 
@@ -11,7 +11,7 @@ class PageAttachmentsController < ApplicationController
 		if request.post?
 			@attachment = PageAttachment.find(params[:id])
 			@attachment.move_lower
-			render :partial => 'admin/page/attachment', :layout => false, :collection => @attachment.page.attachments
+			render :partial => 'admin/pages/attachment', :layout => false, :collection => @attachment.page.attachments
 		end
 	end
 	
@@ -20,7 +20,7 @@ class PageAttachmentsController < ApplicationController
 			@attachment = PageAttachment.find(params[:id])
 			page = @attachment.page
 			@attachment.destroy
-			render :partial => 'admin/page/attachment', :layout => false, :collection => page.attachments
+			render :partial => 'admin/pages/attachment', :layout => false, :collection => page.attachments
 		end
 	end
 end
