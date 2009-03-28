@@ -187,18 +187,28 @@ module PageAttachmentTags
   }
   tag "attachment:each" do |tag|
     page = tag.locals.page
-  	order = tag.attr["order"] || "asc"
-    by = tag.attr["by"] || "position"
-    limit = tag.attr["limit"] || nil
-    offset = tag.attr["offset"] || nil
-    extensions = tag.attr["extensions"] && tag.attr["extensions"].split('|') || []
+    
     returning String.new do |output|
-      page.attachments.by_extensions(extensions, :order => [by, order].join(" "), :limit => limit, :offset => offset).each do |att|
+      page.attachments.find(:all, attachments_find_options(tag)).each do |att|
         tag.locals.attachment = att
         output << tag.expand
       end
     end
-  end  
+  end
+  
+  desc %{
+    Renders the contained elements only if the current contextual page has one or
+    more attachments. The @min_count@ attribute specifies the minimum number of required
+    attachments. You can also filter by extensions with the @extensions@ attribute.
+    
+    *Usage:*
+    <pre><code><r:if_attachments [min_count="n"] [extensions="doc|pdf"]>...</r:if_attachments></code></pre>
+  }
+  tag "if_attachments" do |tag|
+    count = tag.attr['min_count'] && tag.attr['min_count'].to_i || 0
+    attachments = tag.locals.page.attachments.count(:conditions => attachments_find_options(tag)[:conditions])
+    tag.expand if attachments >= count
+  end
   
   desc %{
     Renders the 'extension' virtual attribute of the attachment, extracted from filename.
@@ -220,4 +230,27 @@ module PageAttachmentTags
     attachment = tag.locals.attachment
     attachment.filename[/\.(\w+)$/, 1]
   end
+  
+  private
+    def attachments_find_options(tag)
+      attr = tag.attr.symbolize_keys
+      
+      extensions = attr[:extensions] && attr[:extensions].split('|') || []
+      conditions = unless extensions.blank?
+        [ extensions.map { |ext| "page_attachments.filename LIKE ?"}.join(' OR '), 
+          *extensions.map { |ext| "%.#{ext}" } ]
+      else
+        nil
+      end
+      
+      by = attr[:by] || "position"
+      order = attr[:order] || "asc"
+      
+      options = {
+        :order => "#{by} #{order}",
+        :limit => attr[:limit] || nil,
+        :offset => attr[:offset] || nil,
+        :conditions => conditions
+      }
+    end
 end

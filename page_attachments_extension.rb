@@ -24,7 +24,7 @@ class PageAttachmentsExtension < Radiant::Extension
       include PageAttachmentTags
     }
     UserActionObserver.send :include, ObservePageAttachments
-    Admin::PageController.send :include, PageAttachmentsInterface
+    Admin::PagesController.send :include, PageAttachmentsInterface
   end
 
   def deactivate

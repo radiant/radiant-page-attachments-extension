@@ -132,6 +132,12 @@ class PageAttachmentsExtensionTest < Test::Unit::TestCase
     assert_renders "rails.png", %{<r:attachment:each extensions="png"><r:filename/></r:attachment:each>}
     assert_renders "rails.pngfoo.txt", %{<r:attachment:each extensions="png|txt"><r:filename/></r:attachment:each>}
   end
+  
+  def test_if_attachment_tag
+    assert_renders "content", %{<r:if_attachments>content</r:if_attachments>}
+    assert_renders "", %{<r:if_attachments min_count="3">content</r:if_attachments>}
+    assert_renders "content", %{<r:if_attachments min_count="1" extensions="png">content</r:if_attachments>}
+  end
 
   def test_extension_tag
     assert_renders "pngtxt", %{<r:attachment:each><r:extension/></r:attachment:each>}
