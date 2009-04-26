@@ -4,7 +4,7 @@
   background: white;
   margin: 10px 0;
 }
-#attachments .toolbar { 
+#attachments .toolbar {
   float: right;
   padding: 10px;
   width: 50px;
@@ -49,7 +49,7 @@
 {
   margin-left:20px;
 }
-#attachments ol li div 
+#attachments ol li div
 {
   float:left;width:25px;
 }
@@ -57,11 +57,11 @@
 {
   float:left;margin:0 10px 0 10px;
 }
-#attachments ol li p  
+#attachments ol li p
 {
   margin:0 0 5px 0;
 }
-#attachments ol li  
+#attachments ol li
 {
   margin-bottom:10px;border-bottom:1px dashed #cccccc;width:66%;padding-bottom:3px;
 }
@@ -72,7 +72,7 @@
 
 #attachments p.title
 {
-	border-bottom:1px #EAE3C5 solid;width:66%;font-size:17px;font-weight:bold;
+        border-bottom:1px #EAE3C5 solid;width:66%;font-size:17px;font-weight:bold;
 }
 #attachments table th
 {
@@ -80,7 +80,7 @@
 }
 #attachments table td
 {
- padding-bottom:5px; 
+ padding-bottom:5px;
 }
 #attachments p#reorder_notice
 {
