@@ -15,7 +15,7 @@ class CreatePageAttachmentsExtensionSchema < ActiveRecord::Migration
       t.column "page_id",      :integer
     end
   end
-  
+
   def self.down
     drop_table "page_attachments"
   end

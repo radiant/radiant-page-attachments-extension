@@ -7,7 +7,7 @@ module DifferenceTestHelper
   #      # ...
   #    end
   #  end
-  # 
+  #
   def assert_difference(object, method = nil, difference = 1)
     initial_value = object.send(method)
     yield
