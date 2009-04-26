@@ -204,6 +204,18 @@ module PageAttachmentTags
   end
 
   desc %{
+    Renders the contained elements only if the current contextual page has no attachments.
+
+    *Usage:*
+    <pre><code><r:unless_attachments>...</r:unless_attachments></code></pre>
+  }
+  tag "unless_attachments" do |tag|
+    count = tag.attr[''].to_i
+    attachments = tag.locals.page.attachments.count(:conditions => attachments_find_options(tag)[:conditions])
+    tag.expand if attachments == 0
+  end
+
+  desc %{
     Renders the 'extension' virtual attribute of the attachment, extracted from filename.
 
   *Usage*:
