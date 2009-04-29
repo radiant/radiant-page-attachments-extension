@@ -16,8 +16,9 @@ namespace :radiant do
       task :update => :environment do
         FileUtils.cp PageAttachmentsExtension.root + "/public/stylesheets/page_attachments.css", RAILS_ROOT + "/public/stylesheets/admin"
         FileUtils.cp PageAttachmentsExtension.root + "/public/javascripts/page_attachments.js", RAILS_ROOT + "/public/javascripts"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_higher.png", RAILS_ROOT + "/public/images/admin"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_lower.png", RAILS_ROOT + "/public/images/admin"
+        FileUtils.mkdir RAILS_ROOT + "/public/images/admin/page_attachments" unless File.exist? "#{RAILS_ROOT}/public/images/admin/page_attachments"
+        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_higher.png", RAILS_ROOT + "/public/images/admin/page_attachments"
+        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_lower.png", RAILS_ROOT + "/public/images/admin/page_attachments"
       end
     end
   end

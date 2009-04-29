@@ -2,10 +2,10 @@
 <div>
 	<%= image_tag "admin/minus.png", :alt => "Delete", :class => 'delete' %>
 	<% unless attachment.first? %>
-		<%= image_tag "admin/move_higher.png", :alt => "Move Higher", :class => 'higher' %>
+		<%= image_tag "admin/page_attachments/move_higher.png", :alt => "Move Higher", :class => 'higher' %>
 	<% end %>
 	<% unless attachment.last? %>
-		<%= image_tag "admin/move_lower.png", :alt => "Move Lower", :class => 'lower' %>
+		<%= image_tag "admin/page_attachments/move_lower.png", :alt => "Move Lower", :class => 'lower' %>
 	<% end %>
 </div>
   <% unless attachment.thumbnails.empty? %>
