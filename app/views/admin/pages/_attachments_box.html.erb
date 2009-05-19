@@ -6,10 +6,10 @@
 
   <%= javascript_tag "var auth_token = '#{form_authenticity_token}';" %>
   <% unless @page.attachments.count.zero? %>
-    <ol id="attachment_list">
-      <%= render :partial => 'attachment', :collection => @page.attachments %>
-    </ol>
-    <div style="clear:both;"></div>
+  <ol id="attachment_list">
+    <%= render :partial => 'attachment', :collection => @page.attachments %>
+  </ol>
+  <div style="clear:both;"></div>
   <% end %>
   <p id="reorder_notice" style="display:none;">Page attachments order will appear on site only when cache is cleared (on save or after 5min).</p>
 </div>

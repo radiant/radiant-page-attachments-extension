@@ -14,7 +14,7 @@ class PageAttachmentsExtension < Radiant::Extension
     
      map.connect 'page_attachments/:action/:id', :controller => 'page_attachments'
    end
-  
+
   def activate
     require 'will_paginate'
     admin.tabs.add "Attachments", "/admin/page_attachments", :after => "Layouts", :visibility => [:admin]

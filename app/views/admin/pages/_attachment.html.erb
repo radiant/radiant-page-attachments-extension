@@ -8,12 +8,12 @@
 		<%= image_tag "admin/page_attachments/move_lower.png", :alt => "Move Lower", :class => 'lower' %>
 	<% end %>
 </div>
-  <% unless attachment.thumbnails.empty? %>
-    <%= link_to image_tag(attachment.public_filename("icon")),
-      attachment.public_filename, :class => 'thumbnail' %>
-    <% end %>
-    <% unless attachment.title.blank? %>
-		<p><%= h attachment.short_title %></p>
-	<% end %>
-	<%= link_to attachment.short_filename, attachment.public_filename %>
+<% unless attachment.thumbnails.empty? %>
+<%= link_to image_tag(attachment.public_filename("icon")),
+attachment.public_filename, :class => 'thumbnail' %>
+<% end %>
+<% unless attachment.title.blank? %>
+<p><%= h attachment.short_title %></p>
+<% end %>
+<%= link_to attachment.short_filename, attachment.public_filename %>
 </li>

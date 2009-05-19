@@ -131,6 +131,7 @@ These people have contributed patches that have been added to the extension:
 * [James Burka][jb]
 * [Istvan Hoka][ihoka]
 * [Jim Gay][sf]
+* [Oleg Ivanov][oleg]
 
 [rd]: http://radiantcms.org/
 [sc]: http://seancribbs.com/
@@ -145,3 +146,4 @@ These people have contributed patches that have been added to the extension:
 [jb]: http://github.com/jjburka
 [ihoka]: http://github.com/ihoka
 [sf]: http://www.saturnflyer.com
+[oleg]: http://github.com/morhekil
