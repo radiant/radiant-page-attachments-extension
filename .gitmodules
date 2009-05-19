@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/attachment_fu"]
-	path = vendor/plugins/attachment_fu
-	url = git://github.com/johnmuhl/attachment_fu.git
