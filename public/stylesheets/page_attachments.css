@@ -1,3 +1,9 @@
+.gridded, .gridded li { margin: 0; padding: 0;}
+.gridded { overflow: hidden;}
+.gridded li { background: #000; display: block; float: left; height: 230px; width: 180px; margin: 0 1em 1em 0;}
+.sample { background: #fff; display: block; width: 180px; height: 120px; margin: 0 10px 10px 0; overflow: hidden;}
+.pageTitle { background: #000; color: #fff; padding: 2px; }
+.pageTitle a { color: #fff;}
 #attachments {
   clear: both;
   border: 1px solid #d4cba4;

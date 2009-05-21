@@ -10,6 +10,7 @@ class PageAttachmentsExtension < Radiant::Extension
    define_routes do |map|
      map.namespace :admin do |admin|
        admin.page_attachments '/page_attachments', :controller => 'page_attachments'
+       admin.page_attachments_grid '/page_attachments/grid', :controller => 'page_attachments', :action => 'grid'
      end
     
      map.connect 'page_attachments/:action/:id', :controller => 'page_attachments'
@@ -23,7 +24,7 @@ class PageAttachmentsExtension < Radiant::Extension
       include PageAttachmentAssociations
       include PageAttachmentTags
     }
-    UserActionObserver.send :include, ObservePageAttachments
+    UserActionObserver.instance.send :add_observer!, PageAttachment
     Admin::PagesController.send :include, PageAttachmentsInterface
   end
 

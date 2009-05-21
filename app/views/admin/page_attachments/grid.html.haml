@@ -1,22 +1,20 @@
 %h1 Page Attachments
 %p Below you'll find a list of all page attachments on your site. You may click to view the attachment file, click to edit the attached page, or use the sample code as a starting point for displaying a particular file on a page.
 %p
-  Try the 
-  = link_to('Grid view', admin_page_attachments_grid_path)
-%table.index
-  %tr
-    %th Attachment
-    %th Page
-    %th Code
-  - unless @attachments.blank?
+  See the 
+  = link_to('List view', admin_page_attachments_path)
+- unless @attachments.blank?
+  %ul.gridded
     - @attachments.each do |attachment|
-      %tr
-        %td= link_to((attachment.title.blank? ? attachment.filename : attachment.title), attachment.public_filename)
-        %td= link_to attachment.page.title, page_edit_url(attachment.page)
-        %td
+      %li
+        .sample= link_to(image_tag(preview_path(attachment)), attachment.public_filename)
+        .pageTitle= (attachment.title.blank? ? attachment.filename : attachment.title)
+        .pageTitle= link_to attachment.page.title, page_edit_url(attachment.page)
+        %span
           - if attachment.filename.match(/\.(jpg|gif|png|jpeg|tiff?)$/)
             - code = %{<r:attachment name="#{attachment.filename}" url="#{attachment.page.url}"><r:image /></r:attachment>}
           - else
             - code = %{<r:attachment name="#{attachment.filename}" url="#{attachment.page.url}"><r:link /></r:attachment>}
-          %input{:type => 'text', :size => 40, :value => code}
+          %textarea{:cols => 22, :rows => 4}= code
 = will_paginate @attachments
+- include_stylesheet 'admin/page_attachments'

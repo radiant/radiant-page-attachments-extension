@@ -1,6 +1,9 @@
 namespace :radiant do
   namespace :extensions do
     namespace :page_attachments do
+      
+      desc "Runs the migrate and update tasks"
+      task :install => [:environment, :migrate, :update]
 
       desc "Runs the migration of the Page Attachments extension"
       task :migrate => :environment do
@@ -14,11 +17,14 @@ namespace :radiant do
 
       desc "Installs files relevant to Page Attachments into public/"
       task :update => :environment do
-        FileUtils.cp PageAttachmentsExtension.root + "/public/stylesheets/page_attachments.css", RAILS_ROOT + "/public/stylesheets/admin"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/javascripts/page_attachments.js", RAILS_ROOT + "/public/javascripts"
-        FileUtils.mkdir RAILS_ROOT + "/public/images/admin/page_attachments" unless File.exist? "#{RAILS_ROOT}/public/images/admin/page_attachments"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_higher.png", RAILS_ROOT + "/public/images/admin/page_attachments"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_lower.png", RAILS_ROOT + "/public/images/admin/page_attachments"
+        is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
+        Dir[PageAttachmentsExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
+          path = file.sub(PageAttachmentsExtension.root, '')
+          directory = File.dirname(path)
+          puts "Copying #{path}..."
+          mkdir_p RAILS_ROOT + directory
+          cp file, RAILS_ROOT + path
+        end
       end
     end
   end
