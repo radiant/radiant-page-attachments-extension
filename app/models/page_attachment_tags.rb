@@ -253,8 +253,8 @@ module PageAttachmentTags
 
       options = {
         :order => "#{by} #{order}",
-        :limit => attr[:limit] || nil,
         :offset => attr[:offset] || nil,
+        :limit => attr[:limit] || (attr[:offset] ? 9999 : nil),
         :conditions => conditions
       }
     end
