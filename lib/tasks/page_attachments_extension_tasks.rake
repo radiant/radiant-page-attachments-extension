@@ -12,12 +12,16 @@ namespace :radiant do
         end
       end
 
-      desc "Installs files relevant to Page Attachments into public/"
+      desc "Copies public assets of the Page Attachments to the instance public/ directory."
       task :update => :environment do
-        FileUtils.cp PageAttachmentsExtension.root + "/public/stylesheets/page_attachments.css", RAILS_ROOT + "/public/stylesheets/admin"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/javascripts/page_attachments.js", RAILS_ROOT + "/public/javascripts"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_higher.png", RAILS_ROOT + "/public/images/admin"
-        FileUtils.cp PageAttachmentsExtension.root + "/public/images/admin/move_lower.png", RAILS_ROOT + "/public/images/admin"
+        is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
+        puts "Copying assets from PageAttachmentsExtension"
+        Dir[PageAttachmentsExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
+          path = file.sub(PageAttachmentsExtension.root, '')
+          directory = File.dirname(path)
+          mkdir_p RAILS_ROOT + directory, :verbose => false
+          cp file, RAILS_ROOT + path, :verbose => false
+        end
       end
     end
   end
