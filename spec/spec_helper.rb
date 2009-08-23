@@ -11,6 +11,8 @@ unless defined? RADIANT_ROOT
 end
 require "#{RADIANT_ROOT}/spec/spec_helper"
 
+require 'webrat'
+
 Dataset::Resolver.default << (File.dirname(__FILE__) + "/datasets")
 
 if File.directory?(File.dirname(__FILE__) + "/matchers")
@@ -33,4 +35,5 @@ Spec::Runner.configure do |config|
   #
   # If you declare global fixtures, be aware that they will be declared
   # for all of your examples, even those that don't use them.
+  config.include Webrat::Matchers, :type => [:views]
 end

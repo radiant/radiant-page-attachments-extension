@@ -34,11 +34,11 @@
   padding: 2px;
   margin-left:7px;
 }
-#attachments .attachment img.higher,
-#attachments .attachment img.lower {
-  cursor: pointer;
+#attachments .attachment img.drag-order {
+  cursor: move;
+  float: right;
   padding: 2px;
-  margin-left:6px;
+  margin-right:6px;
 }
 #attachments ol {
   list-style-position:outside;
@@ -82,9 +82,18 @@
 {
  padding-bottom:5px;
 }
-#attachments p#reorder_notice
+#attachments li.attachment.deleted em
 {
   color:#FF0000;margin:0 0 10px 20px;
+}
+#attachments li.attachment.deleted a
+{
+  opacity:0.5;
+  text-decoration:line-through;
+}
+#attachments li.attachment.deleted img.delete
+{
+  visibility: hidden;
 }
 .clearfix:after                 {content:".";display:block;height:0;clear:both;visibility:hidden;}
 .clearfix                       {display:inline-block;}

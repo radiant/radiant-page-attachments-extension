@@ -26,18 +26,25 @@ $LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base)
 require 'spec/rake/spectask'
 # require 'spec/translator'
 
+$:.unshift(RAILS_ROOT + '/vendor/plugins/cucumber/lib')
+require 'cucumber/rake/task'
+
 # Cleanup the RADIANT_ROOT constant so specs will load the environment
 Object.send(:remove_const, :RADIANT_ROOT)
 
 extension_root = File.expand_path(File.dirname(__FILE__))
 
-task :default => :spec
+task :default => [:features, :spec]
 task :stats => "spec:statsetup"
 
 desc "Run all specs in spec directory"
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_opts = ['--options', "\"#{extension_root}/spec/spec.opts\""]
   t.spec_files = FileList['spec/**/*_spec.rb']
+end
+
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "--format progress"
 end
 
 namespace :spec do

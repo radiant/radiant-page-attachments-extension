@@ -11,15 +11,6 @@ Installation
 
 If you want `page_attachments` to generate and display thumbnails of your uploaded images you'll first need to install one of, [`image_science`][is], [`mini-magick`][mm] or [`rmagick`][rm] on your server. This is completely optional, `page_attachments` will still function in every other way without any of these packages installed.
 
-Next, you need to install the `attachment_fu` plugin.
-
-    cd /path/to/radiant
-    git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
-
-If you don't have `git` installed you can simply [download a tarball][af] of `attachment_fu`, upload and unpack it to your `vendor/plugins` directory.
-
-**Failing to install the `attachment_fu` plugin before proceeding will result in an "`uninitialized constant Technoweenie::AttachmentFu`" error when you try to install `page_attachments`.**
-
 Now you're ready to install `page_attachments`.
 
     cd /path/to/radiant
@@ -29,14 +20,16 @@ Now you're ready to install `page_attachments`.
 
 If you don't have `git` you can [download a tarball][pa].
 
-During the `migrate` task you may encounter an "`uninitialized constant Technoweenie::AttachmentFu::Backends`". If this happens try `git clone git://github.com/technoweenie/attachment_fu.git vendor/extensions/page_attachments/vendor/plugins/attachment_fu` and re-run the `migrate` task.
-
 Attachment thumbnails for images default to `:icon => '50x50>'`. You can customize that by setting
 `PAGE_ATTACHMENT_SIZES` to whatever you need in your `config/environment.rb` file
 
     PAGE_ATTACHMENT_SIZES = {:thumb => '120x120>', :normal => '640x480>'}
 
 Restart your server and refresh the admin interface.
+
+Running features and specs
+---
+The Cucumber features use Webrat and Selenium.  You'll need the webrat 0.5.1 and selenium-client 1.2.16 gems installed and you'll need to change the version of webrat specified in environments/test.rb.
 
 Managing Attachments
 ---

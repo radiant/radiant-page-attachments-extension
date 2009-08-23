@@ -14,7 +14,7 @@ class PageAttachmentsDataset < Dataset::Base
     def page_attachment_params(attributes={})
       page = pages(:home)
       { 
-        :size => File.join(File.dirname(__FILE__), '/files/', attributes[:filename]).size,
+        :size => File.join(File.dirname(__FILE__), '/../fixtures/', attributes[:filename]).size,
         :page => page,
         :position => next_position(page),
         :created_by => users(:admin)
