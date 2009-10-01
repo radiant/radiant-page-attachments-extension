@@ -3,8 +3,8 @@
   = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][_delete]", "0"
   = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][position]", attachment.position
   - unless attachment.first? && attachment.last?
-    = image_tag 'admin/drag_order.png', :alt => "Drag handle", :title => "Drag to change order", :class => 'drag-order'
-  %div= image_tag "admin/minus.png", :alt => "Delete", :class => 'delete'
+    = image_tag 'admin/drag_order.png', :alt => "Drag handle", :title => "Drag to change order", :class => 'drag_order'
+  %div= image_tag "admin/minus.png", :alt => "delete", :class => 'delete'
   - unless attachment.thumbnails.empty?
     = link_to image_tag(attachment.public_filename("icon")),  attachment.public_filename, :class => 'thumbnail'
   - unless attachment.title.blank?

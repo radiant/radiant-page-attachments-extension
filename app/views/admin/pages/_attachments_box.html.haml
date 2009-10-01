@@ -1,7 +1,7 @@
 #attachments
   .toolbar
-    = image_tag('admin/plus.png', :alt => 'Add')
-    = hidden_field_tag('attachment_index', @page.attachments.size, :id => 'attachment-index-field')
+    = image_tag('admin/plus.png', :alt => 'add')
+    = hidden_field_tag('attachment_index', @page.attachments.size, :id => 'attachment_index_field')
   %h3
     Attachments (
     %span#attachment_count>= @page.attachments.count
