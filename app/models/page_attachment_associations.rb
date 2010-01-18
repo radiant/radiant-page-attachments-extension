@@ -5,9 +5,8 @@ module PageAttachmentAssociations
                :class_name => "PageAttachment",
                :dependent => :destroy,
                :order => 'position'
-      attr_accessor :add_attachments
-      after_save :save_attachments
       include InstanceMethods
+      accepts_nested_attributes_for :attachments, :allow_destroy => true
     }
   end
 
@@ -16,20 +15,6 @@ module PageAttachmentAssociations
     def attachment(name)
       att = attachments.find(:first, :conditions => ["filename LIKE ?", name.to_s])
       att.blank? ? ((parent.attachment(name) if parent) or nil) : att
-    end
-
-    def save_attachments
-      if @add_attachments && ! @add_attachments['file'].blank?
-        i = 0
-        @add_attachments['file'].each do |page_attach|
-          attach = PageAttachment.new(:uploaded_data => page_attach)
-          attach.title = @add_attachments['title'][i]
-          attach.description = @add_attachments['description'][i]
-          attachments << attach
-          i += 1
-        end
-      end
-      @add_attachments = nil
     end
   end
 end

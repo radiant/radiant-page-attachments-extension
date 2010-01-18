@@ -1,0 +1,12 @@
+#attachments
+  .toolbar
+    = image_tag('admin/plus.png', :alt => 'add')
+    = hidden_field_tag('attachment_index', @page.attachments.size, :id => 'attachment_index_field')
+  %h3
+    Attachments (
+    %span#attachment_count>= @page.attachments.count
+    )
+  - unless @page.attachments.count.zero?
+    %ol#attachment_list
+      = render :partial => 'attachment', :collection => @page.attachments
+    %div{:style => "clear:both;"}

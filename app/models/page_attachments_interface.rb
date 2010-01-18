@@ -11,7 +11,8 @@ module PageAttachmentsInterface
     def add_page_attachment_partials
       @buttons_partials ||= []
       @buttons_partials << "attachments_box"
-      include_javascript 'page_attachments'
+      include_javascript 'admin/dragdrop'
+      include_javascript 'admin/page_attachments'
       include_stylesheet 'admin/page_attachments'
     end
   end

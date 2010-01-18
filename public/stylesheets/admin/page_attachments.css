@@ -1,0 +1,133 @@
+#attachments {
+  clear: both;
+  color: #333;
+  background: #f5f1e2 url(/images/admin/vertical_tan_gradient.png) repeat-x top;
+  margin: 10px 0;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  overflow: hidden;
+}
+#attachments .toolbar {
+  float: right;
+  padding: 6px 6px 0;
+  width: 50px;
+  text-align: right;
+}
+#attachments .toolbar img {
+  padding: 5px;
+  cursor: pointer;
+}
+#attachments h3 {
+  font-size: 16px;
+  padding: 7px 0;
+}
+#attachments h3, #attachments p.notice {
+  background: #eae3c5;
+  margin: 0;
+  padding: 0.5em;
+}
+#attachments .attachment_upload {
+  padding: 0 0.8em 0.8em 0.8em;
+}
+#attachments p.notice {
+  padding: .5em .8em;
+  font-style: italic;
+  font-size: 90%;
+  color: red;
+}
+#attachments .attachment_upload img,
+#attachments .attachment img.delete {
+  cursor: pointer;
+  padding: 2px;
+  margin-left:7px;
+}
+#attachments .attachment img.drag_order {
+  cursor: move;
+  float: right;
+  padding: 2px;
+  margin-right:6px;
+}
+#attachments ol {
+  list-style: none;
+  padding: 0 10px 0 10px;
+  margin: 0;
+}
+#attachments ol li {
+  margin-left: 0;
+}
+#attachments ol li div {
+  float: left;
+  width: 25px;
+}
+#attachments ol li a.thumbnail {
+  float: left;
+  margin: 0 10px 0 10px;
+}
+#attachments ol li p {
+  margin: 0 0 5px 0;
+}
+#attachments ol li {
+  border-bottom: 1px dashed #cccccc;
+  width: 100%;
+  padding: 8px 0;
+}
+#attachments ol li:last-child {
+  border-bottom: none;
+}
+#attachments .attachment .thumbnail img {
+  background: white;
+  border: 1px solid #d4cba4;
+  padding: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+#attachments p.title {
+  border-bottom: 1px #eae3c5 solid;
+  width: 66%;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 1em 0 ;
+}
+#attachments table {
+  margin-top: 1em;
+}
+#attachments table th {
+  font-weight: bold;
+  text-align: right;
+  padding-right: 10px;
+  width: 120px;
+  padding-bottom: 5px;
+}
+#attachments table td {
+ padding-bottom: 5px;
+}
+#attachments li.attachment.deleted em {
+  color: #ff0000;
+  margin: 0 0 10px 20px;
+}
+#attachments li.attachment.deleted a {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+#attachments li.attachment.deleted img.delete {
+  visibility: hidden;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  display:inline-block;
+}
+.clearfix {
+  display:block;
+}
+li.clearfix {
+  display: list-item;
+}
