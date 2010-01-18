@@ -1,0 +1,21 @@
+%h1 Edit Page Attachment
+- form_for :page_attachment, @page_attachment, :url => admin_page_attachment_path(@page_attachment), :html => {:method => :put, :multipart => true} do |form|
+  .form-area
+    %p.title
+      = form.label :title
+      = form.text_field :title, :class => 'textbox', :maxlength => 255
+    %p.title
+      = form.label :description
+      = form.text_field :description, :class => 'textbox', :maxlength => 255
+  %p.buttons
+    = form.submit "Save"
+    or
+    = link_to 'Cancel', admin_page_attachments_url
+  %p
+    = image_tag "admin/minus.png", :alt => "Delete", :class => 'delete'
+    - unless @page_attachment.thumbnails.empty?
+      = link_to image_tag(@page_attachment.public_filename("icon")), @page_attachment.public_filename, :class => 'thumbnail'
+  - unless @page_attachment.title.blank?
+    %p
+      = h @page_attachment.short_title
+      = link_to @page_attachment.short_filename, @page_attachment.public_filename

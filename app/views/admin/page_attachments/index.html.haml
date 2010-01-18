@@ -11,7 +11,9 @@
   - unless @attachments.blank?
     - @attachments.each do |attachment|
       %tr
-        %td= link_to((attachment.title.blank? ? attachment.filename : attachment.title), attachment.public_filename)
+        %td
+          = link_to((attachment.title.blank? ? attachment.filename : attachment.title), edit_admin_page_attachment_path(attachment))
+          = link_to('(view)', attachment.filename)
         %td= link_to attachment.page.title, page_edit_url(attachment.page)
         %td
           - if attachment.filename.match(/\.(jpg|gif|png|jpeg|tiff?)$/)

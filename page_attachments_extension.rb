@@ -1,4 +1,4 @@
-require_dependency 'application'
+require_dependency 'application_controller'
 # require File.dirname(__FILE__) + '/lib/geometry'
 # require 'tempfile'
 
@@ -6,19 +6,26 @@ class PageAttachmentsExtension < Radiant::Extension
   version "0.3"
   description "Adds page-attachment-style asset management."
   url "http://radiantcms.org"
+  
+  extension_config do |config|
+    config.gem 'will_paginate'
+  end
 
    define_routes do |map|
      map.namespace :admin do |admin|
-       admin.page_attachments '/page_attachments', :controller => 'page_attachments'
-       admin.page_attachments_grid '/page_attachments/grid', :controller => 'page_attachments', :action => 'grid'
+       admin.resources :page_attachments
+       admin.page_attachments_grid '/page_attachments_grid', :controller => 'page_attachments', :action => 'grid'
      end
-    
-     map.connect 'page_attachments/:action/:id', :controller => 'page_attachments'
    end
 
   def activate
-    require 'will_paginate'
-    admin.tabs.add "Attachments", "/admin/page_attachments", :after => "Layouts", :visibility => [:admin]
+    if self.respond_to?(:tab)
+      tab "Attachments" do
+        add_item 'List', "/admin/page_attachments"
+      end
+    else
+      admin.tabs.add 'Attachments', '/admin/page_attachments', :after => "Layouts", :visibility => [:admin]
+    end
     # Regular page attachments stuff
     Page.class_eval {
       include PageAttachmentAssociations
