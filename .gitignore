@@ -1,0 +1,5 @@
+.svn
+.DS_Store
+coverage
+rdoc
+pkg
