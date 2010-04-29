@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sean Cribbs"]
-  s.date = %q{2010-04-21}
+  s.date = %q{2010-04-29}
   s.description = %q{Page Attachments adds support for file uploads realized as attachments to individual pages. Attachments can have an order via acts_as_list, a title, a description and various metadata fields as provided by AttachmentFu.}
   s.email = %q{radiant@radiantcms.org}
   s.extra_rdoc_files = [
