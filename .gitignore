@@ -1,4 +1,5 @@
 .svn
-*/**/.DS_Store
 .DS_Store
-app/.DS_STORE
+coverage
+rdoc
+pkg
