@@ -23,7 +23,7 @@ Event.addBehavior({
       var attachment = event.findElement('.attachment');
       attachment.addClassName('deleted');
       attachment.insert("<em>Attachment will be deleted when page is saved.</em>");
-      attachment.down('input[name*="_delete"]').setValue('true');
+      attachment.down('input[name*="_destroy"]').setValue('true');
     }
   }
 

@@ -1,6 +1,6 @@
 %li{:id => "attachment_#{attachment.id}", :class =>"attachment clearfix"}
   = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][id]", attachment.id
-  = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][_delete]", "0"
+  = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][_destroy]", "0"
   = hidden_field_tag "page[attachments_attributes][#{attachment_counter}][position]", attachment.position
   - unless attachment.first? && attachment.last?
     = image_tag 'admin/drag_order.png', :alt => "Drag handle", :title => "Drag to change order", :class => 'drag_order'
