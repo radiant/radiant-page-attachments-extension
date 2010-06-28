@@ -3,7 +3,7 @@ require_dependency 'application_controller'
 # require 'tempfile'
 
 class PageAttachmentsExtension < Radiant::Extension
-  version "1.0.1"
+  version "1.0.2"
   description "Adds page-attachment-style asset management."
   url "http://radiantcms.org"
   

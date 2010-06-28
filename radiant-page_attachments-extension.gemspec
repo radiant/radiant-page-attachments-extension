@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{radiant-page_attachments-extension}
-  s.version = "1.0.0"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sean Cribbs"]
-  s.date = %q{2010-04-29}
+  s.date = %q{2010-06-28}
   s.description = %q{Page Attachments adds support for file uploads realized as attachments to individual pages. Attachments can have an order via acts_as_list, a title, a description and various metadata fields as provided by AttachmentFu.}
   s.email = %q{radiant@radiantcms.org}
   s.extra_rdoc_files = [
@@ -18,15 +18,21 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     "HELP.md",
      "LICENSE",
      "README.md",
      "Rakefile",
      "VERSION",
-     "app/models/observe_page_attachments.rb",
+     "app/controllers/admin/page_attachments_controller.rb",
+     "app/helpers/admin/page_attachments_helper.rb",
      "app/models/page_attachment.rb",
      "app/models/page_attachment_associations.rb",
      "app/models/page_attachment_tags.rb",
      "app/models/page_attachments_interface.rb",
+     "app/views/admin/page_attachments/edit.html.haml",
+     "app/views/admin/page_attachments/grid.html.haml",
+     "app/views/admin/page_attachments/index.html.haml",
+     "app/views/admin/pages/_attachment.html.erb",
      "app/views/admin/pages/_attachment.html.haml",
      "app/views/admin/pages/_attachments_box.html.haml",
      "db/migrate/001_create_page_attachments_extension_schema.rb",
@@ -40,8 +46,13 @@ Gem::Specification.new do |s|
      "lib/tasks/page_attachments_extension_tasks.rake",
      "page_attachments_extension.rb",
      "public/images/admin/drag_order.png",
+     "public/images/admin/page_attachments/move_higher.png",
+     "public/images/admin/page_attachments/move_lower.png",
+     "public/images/admin/page_attachments/pdf-icon.png",
+     "public/javascripts/admin/lowpro.js",
      "public/javascripts/admin/page_attachments.js",
      "public/stylesheets/admin/page_attachments.css",
+     "public/stylesheets/page_attachments.css",
      "radiant-page_attachments-extension.gemspec",
      "spec/controllers/pages_controller_spec.rb",
      "spec/datasets/page_attachments_dataset.rb",
@@ -108,7 +119,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/radiant/radiant-page-attachments-extension}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Adds page-attachment-style asset management.}
   s.test_files = [
     "spec/controllers/pages_controller_spec.rb",
@@ -124,7 +135,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<cucumber>, [">= 0"])
     else
