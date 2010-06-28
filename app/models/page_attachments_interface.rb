@@ -12,7 +12,7 @@ module PageAttachmentsInterface
       @buttons_partials ||= []
       @buttons_partials << "attachments_box"
       include_javascript 'admin/lowpro'
-      include_javascript 'dragdrop'
+      include_javascript 'admin/dragdrop'
       include_javascript 'admin/page_attachments'
       include_stylesheet 'admin/page_attachments'
     end
