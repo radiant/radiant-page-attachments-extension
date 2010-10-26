@@ -12,6 +12,8 @@ class PageAttachment < ActiveRecord::Base
              :class_name => 'User',
              :foreign_key => 'updated_by'
   belongs_to :page
+  
+  attr_accessible :title, :description
 
   def short_filename(wanted_length = 15, suffix = ' ...')
           (self.filename.length > wanted_length) ? (self.filename[0,(wanted_length - suffix.length)] + suffix) : self.filename
