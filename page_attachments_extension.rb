@@ -11,13 +11,6 @@ class PageAttachmentsExtension < Radiant::Extension
     config.gem 'will_paginate'
   end
 
-   define_routes do |map|
-     map.namespace :admin do |admin|
-       admin.resources :page_attachments
-       admin.page_attachments_grid '/page_attachments_grid', :controller => 'page_attachments', :action => 'grid'
-     end
-   end
-
   def activate
     if self.respond_to?(:tab)
       tab "Attachments" do
