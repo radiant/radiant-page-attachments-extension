@@ -128,7 +128,18 @@ module PageAttachmentTags
     raise TagError, "'name' attribute required" unless name = tag.attr.delete('name') or tag.locals.attachment
     page = tag.locals.page
     attachment = tag.locals.attachment || page.attachment(name)
-    size = tag.attr['size'] || nil
+    # 
+    # The size attr should be removed here, else you get a img tag attr called 'size'
+    # which will not validate.
+    # 
+    # size = tag.attr['size'] || nil
+    size = tag.attr.delete('size') || nil
+    # 
+    # Speaking of validate, all img tags should have an alt attr, so at the very least
+    # throw the filename at the value of the alt attr value
+    # 
+    tag.attr['alt'] == nil ? tag.attr['alt'] = name : nil
+    # 
     raise TagError, "attachment is not an image." unless attachment.content_type.strip =~ /^image\//
     filename = attachment.public_filename(size) rescue ""
     attributes = tag.attr.inject([]){ |a,(k,v)| a << %{#{k}="#{v}"} }.join(" ").strip
